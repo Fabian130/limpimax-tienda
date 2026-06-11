@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Tienda de Aseo"
+version = "1.0.0"
+id = "artifacts/tienda-aseo"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23408
+
+[services.development]
+run = "pnpm --filter @workspace/tienda-aseo run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/tienda-aseo", "run", "build" ]
+publicDir = "artifacts/tienda-aseo/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23408"
+BASE_PATH = "/"
